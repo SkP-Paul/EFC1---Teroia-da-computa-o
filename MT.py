@@ -5,7 +5,9 @@ def maquinaDeTuring (inicial = None,
                      numfitas = 1):
     posicao = 0
     branco = '□'
+    #Armazena o estado atual
     st = inicial
+    #Armazena a quantidade de fitas
     numfitas = len(fitas)
     i = 0
     
@@ -13,10 +15,13 @@ def maquinaDeTuring (inicial = None,
         print(i)
 
         if numfitas == 2 :
+            #Reorganiza as regras de transições
             if i == 0 : regras = dict (((s0, v0), (v1, dr, s1)) for (s0, v0, v1, dr, v2, v3, dr1, s1) in regras)
             else :
                 posicao = 0
+                #Reorganiza as regras de transições
                 dict (((s0, v2), (v3, dr1, s1)) for (s0, v0, v1, dr, v2, v3, dr1, s1) in regras)
+        #Reorganiza as regras de transições
         else : regras = dict (((s0, v0), (v1, dr, s1)) for (s0, v0, v1, dr, s1) in regras)
         
         if not fita: fita = [branco]
@@ -48,7 +53,9 @@ def maquinaDeTuring (inicial = None,
             st = s1
         i += 1
 
+    #Se for máquina por estado final
     if final != None :
+        #Se for o estado for final Aceita
         if st == final : print("Aceita")
         else: print("Rejeita")
 
@@ -157,23 +164,6 @@ maquinaDeTuring(inicial = 'q0',
                                 )
                     )
 
-print ("\n Máquina 4:")
-
-maquinaDeTuring(inicial = 'q0',
-                    fitas = [list("□abc□"), list("□□")],
-                    final = 'q4',
-                    regras = map(tuple,
-                                 [
-                                     "q0 □ □ right □ □ right q1".split(),
-                                     "q1 a a right a □ right q1".split(),
-                                     "q1 b b static □ □ left q2".split(),
-                                     "q2 b b right a X left q2".split(),
-                                     "q2 c c static □ □ right q3".split(),
-                                     "q3 c c right X Z right q3".split(),
-                                     "q3 □ □ static □ □ static q4".split(),
-                                 ]
-                                )
-                    )
 
 print ("\n Máquina 5:")
 
@@ -189,6 +179,24 @@ maquinaDeTuring(inicial = 'q0',
                                      "q1 c c left q2".split(),
                                      "q2 a b left q2".split(),
                                      "q2 b a left q2".split(),
+                                 ]
+                                )
+                    )
+
+print ("\n Máquina 4:")
+
+maquinaDeTuring(inicial = 'q0',
+                    fitas = [list("□abc□"), list("□□")],
+                    final = 'q4',
+                    regras = map(tuple,
+                                 [
+                                     "q0 □ □ right □ □ right q1".split(),
+                                     "q1 a a right a □ right q1".split(),
+                                     "q1 b b static □ □ left q2".split(),
+                                     "q2 b b right a X left q2".split(),
+                                     "q2 c c static □ □ right q3".split(),
+                                     "q3 c c right X Z right q3".split(),
+                                     "q3 □ □ static □ □ static q4".split(),
                                  ]
                                 )
                     )
